@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:music_player/constants/constants.dart';
 import 'package:music_player/play_music/play_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:music_player/must_list/list_view.dart';
 import 'package:music_player/theme/app_theme.dart';
 
 class PlayView extends StatelessWidget {
-  final String songFilename;
+  final int songId;
 
-  const PlayView({super.key, required this.songFilename});
+  const PlayView({super.key, required this.songId});
 
   void _playInitialSong(BuildContext context) {
     Future.microtask(() {
       // ignore: use_build_context_synchronously
       final controller = Provider.of<AudioController>(context, listen: false);
-      controller.playSong(songFilename);
+      controller.playSong(songId);
     });
   }
 
@@ -68,7 +67,7 @@ class PlayView extends StatelessWidget {
                           width: 300,
                           height: 300,
                           child: Image.network(
-                            Constants.sampleGif,
+                            controller.songThumbnail,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -78,9 +77,9 @@ class PlayView extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Remedy', style: AppTheme.robotoBold(20)),
+                        Text(controller.songTitle, style: AppTheme.robotoBold(20)),
                         const SizedBox(height: 2),
-                        Text('Yeshudas', style: AppTheme.robotoSubtitiles(16)),
+                        Text(controller.songArtist, style: AppTheme.robotoSubtitiles(16)),
                         const SizedBox(height: 10),
                         SliderTheme(
                           data: SliderTheme.of(context).copyWith(

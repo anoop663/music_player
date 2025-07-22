@@ -1,4 +1,4 @@
-class Song {
+class SongModel {
   final int id;
   final String title;
   final String artist;
@@ -6,8 +6,9 @@ class Song {
   final String filename;
   final String? thumbnail;
   final String path;
+  final String url;
 
-  Song({
+  SongModel({
     required this.id,
     required this.title,
     required this.artist,
@@ -15,10 +16,11 @@ class Song {
     required this.filename,
     this.thumbnail,
     required this.path,
+    required this.url,
   });
 
-  factory Song.fromJson(Map<String, dynamic> json) {
-    return Song(
+  factory SongModel.fromJson(Map<String, dynamic> json) {
+    return SongModel(
       id: json['id'],
       title: json['title'],
       artist: json['artist'],
@@ -26,6 +28,7 @@ class Song {
       filename: json['filename'],
       thumbnail: json['thumbnail'],
       path: json['path'],
+      url: json['url'],
     );
   }
 }

@@ -61,6 +61,7 @@ class MusicList extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final song = songs[index];
                     final fileName = song.filename;
+                    final songId = song.id;
                     return Row(
                       children: [
                         InkWell(
@@ -68,7 +69,8 @@ class MusicList extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PlayView(songFilename: fileName,),
+                                builder: (context) =>
+                                    PlayView(songId: songId),
                               ),
                             );
                           },
